@@ -540,29 +540,15 @@ It looks like the folder in our root file system, but it's not. It's a separate 
 
 -----------------------------------------------------------------------------------------------------------------------------
 
+1. Install Apache
+   
+   Download Apache httpd
+   http://httpd.apache.org/download.cgi#apache24
+   https://archive.apache.org/dist/httpd/binaries/win32/
 
-1. Let's start with creating a folder structure for documentation, frontend, backend
+   Take httpd-2.2.25-win32-x86-no_ssl.txt from downloads and rename to .msi to install
 
-Folder Structure
-
-fullstackdemo
-- documentation
-- frontend
-  - app
-	- images
-	- scripts
-		- controllers
-		- services
-	- styles
-	- templates
-  - test
-  - 
-  - 
-- backend
-  - 
-  - 
-  - 
-  - 
+   Validate by http://localhost
 
 
 2. The first step for full stack service development is creation of web UI, This is done using bootstrap framework
