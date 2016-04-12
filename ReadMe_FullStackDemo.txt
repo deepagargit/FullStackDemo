@@ -551,6 +551,68 @@ It looks like the folder in our root file system, but it's not. It's a separate 
    Validate by http://localhost
 
 
+2. Setting up mod_wsgi for apache and Django on Windows in httpd.conf
+   <This is not required as python is not used for browser rendering>
+
+   https://pradyumnajoshi.wordpress.com/2009/06/09/setting-up-mod_wsgi-for-apache-and-django-on-windows/
+
+   File : https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/modwsgi/mod_wsgi-win32-ap22py31-3.3.so
+
+   Copy file at location C:\Program Files (x86)\Apache Software Foundation\Apache2.2\modules 
+   Rename to mod_wsgi.so
+
+   Add in httpd.conf
+   LoadModule wsgi_module modules/mod_wsgi.so
+
+3. Set new DocumentRoot in httpd.conf
+
+   #DocumentRoot "C:/Program Files (x86)/Apache Software Foundation/Apache2.2/htdocs"
+    DocumentRoot "C:/deepagar/FullStackDemo/frontend/app"
+
+Add in httpd.conf
+
+<Directory "C:/deepagar/FullStackDemo/frontend/app">
+    #
+    # Possible values for the Options directive are "None", "All",
+    # or any combination of:
+    #   Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI MultiViews
+    #
+    # Note that "MultiViews" must be named *explicitly* --- "Options All"
+    # doesn't give it to you.
+    #
+    # The Options directive is both complicated and important.  Please see
+    # http://httpd.apache.org/docs/2.2/mod/core.html#options
+    # for more information.
+    #
+    Options Indexes FollowSymLinks
+
+    #
+    # AllowOverride controls what directives may be placed in .htaccess files.
+    # It can be "All", "None", or any combination of the keywords:
+    #   Options FileInfo AuthConfig Limit
+    #
+    AllowOverride None
+
+    #
+    # Controls who can get stuff from this server.
+    #
+    Order allow,deny
+    Allow from all
+
+</Directory>
+
+
+Comment #Deny from all in httpd.conf
+
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+    Order deny,allow
+    #Deny from all
+</Directory>
+
+
+
 2. The first step for full stack service development is creation of web UI, This is done using bootstrap framework
 
 Refer - http://www.alphr.com/features/383794/create-a-website-with-bootstrap

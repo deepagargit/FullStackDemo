@@ -211,7 +211,7 @@ app.controller('ImageCreateCtrl', ['$scope', 'ImagesFactory', '$location',
 
 
 app.controller('IaaSListCtrl', ['$scope', 'IaaSsFactory', 'IaaSFactory', '$location', 
-  function ($scope, IaaSFactory, IaaSFactory, $location) {
+  function ($scope, IaaSsFactory, IaaSFactory, $location) {
 
     // callback for ng-click 'deleteIaaS': 
     $scope.deleteIaaS = function (iaasId) {
