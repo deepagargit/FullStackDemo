@@ -1,4 +1,5 @@
-Creating a micro-service from scratch
+Creating a backend micro-service from scratch
+---------------------------------------------
 
 The micro-service typically needs a DB (to store the state in backend) also called a Model,  a controller to have business-logic on user data and operate on Model, a view to give the snapshot of information to the user.
 
@@ -16,6 +17,7 @@ Let's start with the installations & setting-up dependent tools:
 
 0. Create the folder structure
    FullStackDemo 
+   - downloads
    - backend
      - django_backend
      - java_backend
