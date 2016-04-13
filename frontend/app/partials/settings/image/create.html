@@ -1,0 +1,61 @@
+<div class="container">
+  <h1>Create a new image</h1>
+
+  <form novalidate="novalidate" class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label" for="family">Family</label>
+
+      <div class="controls">
+        <input type="text" id="family" ng-model="image.family" placeholder="Family"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="edition">Edition</label>
+
+      <div class="controls">
+        <input type="text" id="edition" ng-model="tool.edition" placeholder="Edition"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="name">Name</label>
+
+      <div class="controls">
+        <input type="text" id="name" ng-model="tool.name" placeholder="Name"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="display">Type</label>
+
+      <div class="controls">
+        <input type="text" id="display" ng-model="tool.display" placeholder="Display"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="description">Description</label>
+
+      <div class="controls">
+        <input type="text" id="description" ng-model="tool.description" placeholder="Description"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="language">Language</label>
+
+      <div class="controls">
+        <input type="text" id="language" ng-model="tool.language" placeholder="Language"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="architecture">Architecture</label>
+
+      <div class="controls">
+        <input type="text" id="architecture" ng-model="tool.architecture" placeholder="Architecture"/>
+      </div>
+    </div>
+	<h1> </h1>
+    <div class="control-group">
+      
+        <a ng-click="create NewImage()" class="btn btn-small btn-primary">Update Image</a>
+      
+    </div>
+  </form>
+</div>

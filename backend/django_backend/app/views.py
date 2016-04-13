@@ -53,7 +53,7 @@ class ToolDetail(APIView):
 
     def get(self, request, pk, format=None):
         tool = self.get_object(pk)
-        serializer = ToolSerializer(vm_server)
+        serializer = ToolSerializer(tool)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):

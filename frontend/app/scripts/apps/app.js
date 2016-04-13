@@ -95,27 +95,28 @@ app.run(function ($rootScope, $templateCache) {
 
 app.controller('ToolListCtrl', ['$scope', 'ToolsFactory', 'ToolFactory', '$location', 
   function ($scope, ToolsFactory, ToolFactory, $location) {
-
-    // callback for ng-click 'deleteTool': 
+		// callback for ng-click 'deleteTool': 
     $scope.deleteTool = function (toolId) {
       ToolFactory.delete({ id: toolId });
 	  
-	  setTimeout(function(){ $scope.tools = ToolsFactory.query(); }, 100);
+	  $scope.tools = ToolsFactory.query(); 
       
     };
 
-    $scope.tools = ToolsFactory.query();
+		$scope.tools = ToolsFactory.query();
+		console.log($scope.tools)
+
   }]);
 
 
-app.controller('ToolDetailCtrl', ['$scope', '$routeParams', 'ToolFactory', '$location',
-  function ($scope, $routeParams, ToolFactory, $location) {
+app.controller('ToolDetailCtrl', ['$scope', '$routeParams', 'ToolsFactory', 'ToolFactory', '$location',
+  function ($scope, $routeParams, ToolsFactory, ToolFactory, $location) {
  
     $scope.updateTool = function () {
-	  
+	  console.log($scope.tool)
       ToolFactory.update($scope.tool);
-	  
-	  setTimeout(function(){ $location.path('/tool-list'); }, 100);
+	  //$location.path('/tool-list');
+	  setTimeout(function(){ $location.path('/tool-list'); }, 10);
     };
 
     // callback for ng-click 'cancel': 
@@ -123,9 +124,11 @@ app.controller('ToolDetailCtrl', ['$scope', '$routeParams', 'ToolFactory', '$loc
       $location.path('/tool-list');
     };
 	
-	//console.log($routeParams.id)
+	console.log($routeParams.id)
 	//$scope.items_type = [{name: "ansible" , description: "Ansible"}, {name: "cm" , description: "puppet"}, {name: "discovery" , description: "template"},]
-    //$scope.tool = ToolFactory.show({id: $routeParams.id});
+	
+    $scope.tool = ToolFactory.show({id: $routeParams.id});
+	console.log($scope.tool)
   }]);
 
 app.controller('ToolCreateCtrl', ['$scope', 'ToolsFactory', '$location',
@@ -136,8 +139,8 @@ app.controller('ToolCreateCtrl', ['$scope', 'ToolsFactory', '$location',
 	  
 	  console.log($scope.tool)
       ToolsFactory.create($scope.tool);
+	  $location.path('/tool-list');
 	  
-      setTimeout(function(){ $location.path('/tool-list'); }, 100);
     }
 	
 	
