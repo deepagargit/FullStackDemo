@@ -1,40 +1,52 @@
 <div class="container">
-  <h1>Create a new user</h1>
+  <h1>Update an IaaS</h1>
 
   <form novalidate="novalidate" class="form-horizontal">
     <div class="control-group">
       <label class="control-label" for="name">Name</label>
 
       <div class="controls">
-        <input type="text" id="tool.name" ng-model="tool.name" placeholder="Name"/>
+        <input type="text" id="name" ng-model="iaas.name" placeholder="Name"/>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="description">Descripton</label>
 
       <div class="controls">
-        <input type="text" id="description" ng-model="tool.description" placeholder="Description"/>
-      </div>
-    </div>
-	<div class="control-group">
-      <label class="control-label" for="version">Version</label>
-
-      <div class="controls">
-        <input type="text" id="version" ng-model="tool.version" placeholder="Version"/>
+        <input type="text" id="description" ng-model="iaas.description" placeholder="Description"/>
       </div>
     </div>
 	<div class="control-group">
       <label class="control-label" for="type">Type</label>
 
       <div class="controls">
-        <input type="text" id="type" ng-model="tool.type" placeholder="Type"/>
+        <input type="text" id="type" ng-model="iaas.type" placeholder="Type"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="type">IP address</label>
+
+      <div class="controls">
+        <input type="text" id="ip" ng-model="iaas.ip" placeholder="IP address"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="type">Username</label>
+
+      <div class="controls">
+        <input type="text" id="user" ng-model="iaas.user" placeholder="Username"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="type">Password</label>
+
+      <div class="controls">
+        <input type="text" id="password" ng-model="iaas.password" placeholder="Password"/>
       </div>
     </div>
 	<h1> </h1>
     <div class="control-group">
-      
-        <a ng-click="updateTool()" class="btn btn-small btn-primary">Update Tool</a>
-      
+        <a ng-click="updateIaaS()" class="btn btn-small btn-primary">Update IaaS</a>
     </div>
   </form>
 </div>

@@ -160,7 +160,7 @@ app.controller('ImageListCtrl', ['$scope', 'ImagesFactory', 'ImageFactory', '$lo
     $scope.deleteImage = function (imageId) {
       ImageFactory.delete({ id: imageId });
 	  
-	  setTimeout(function(){ $scope.images = ImagesFactory.query(); }, 100);
+	  setTimeout(function(){ $scope.images = ImagesFactory.query(); }, 10);
       
     };
 
@@ -175,7 +175,7 @@ app.controller('ImageDetailCtrl', ['$scope', '$routeParams', 'ImageFactory', '$l
 	  
       ImageFactory.update($scope.image);
 	  
-	  setTimeout(function(){ $location.path('/image-list'); }, 100);
+	  setTimeout(function(){ $location.path('/image-list'); }, 10);
     };
 
     // callback for ng-click 'cancel': 
@@ -183,9 +183,9 @@ app.controller('ImageDetailCtrl', ['$scope', '$routeParams', 'ImageFactory', '$l
       $location.path('/image-list');
     };
 	
-	//console.log($routeParams.id)
+	console.log($routeParams.id)
 	//$scope.items_type = [{name: "ansible" , description: "Ansible"}, {name: "cm" , description: "puppet"}, {name: "discovery" , description: "template"},]
-    //$scope.tool = ToolFactory.show({id: $routeParams.id});
+    $scope.image = ImageFactory.show({id: $routeParams.id});
   }]);
 
 app.controller('ImageCreateCtrl', ['$scope', 'ImagesFactory', '$location',
@@ -197,7 +197,7 @@ app.controller('ImageCreateCtrl', ['$scope', 'ImagesFactory', '$location',
 	  console.log($scope.image)
       ImagesFactory.create($scope.image);
 	  
-      setTimeout(function(){ $location.path('/image-list'); }, 100);
+      setTimeout(function(){ $location.path('/image-list'); }, 10);
     }
 	
 	
@@ -220,7 +220,7 @@ app.controller('IaaSListCtrl', ['$scope', 'IaaSsFactory', 'IaaSFactory', '$locat
     $scope.deleteIaaS = function (iaasId) {
       IaaSFactory.delete({ id: iaasId });
 	  
-	  setTimeout(function(){ $scope.iaass = IaaSsFactory.query(); }, 100);
+	  setTimeout(function(){ $scope.iaass = IaaSsFactory.query(); }, 10);
       
     };
 
@@ -231,11 +231,13 @@ app.controller('IaaSListCtrl', ['$scope', 'IaaSsFactory', 'IaaSFactory', '$locat
 app.controller('IaaSDetailCtrl', ['$scope', '$routeParams', 'IaaSFactory', '$location',
   function ($scope, $routeParams, IaaSFactory, $location) {
  
-    $scope.updateIaas = function () {
+    $scope.updateIaaS = function () {
+
+	  console.log($scope.iaas)
+
+      IaaSFactory.update($scope.iaas);
 	  
-      ToolFactory.update($scope.iaas);
-	  
-	  setTimeout(function(){ $location.path('/iaas-list'); }, 100);
+	  setTimeout(function(){ $location.path('/iaas-list'); }, 10);
     };
 
     // callback for ng-click 'cancel': 
@@ -243,13 +245,13 @@ app.controller('IaaSDetailCtrl', ['$scope', '$routeParams', 'IaaSFactory', '$loc
       $location.path('/iaas-list');
     };
 	
-	//console.log($routeParams.id)
+	console.log($routeParams.id)
 	//$scope.items_type = [{name: "ansible" , description: "Ansible"}, {name: "cm" , description: "puppet"}, {name: "discovery" , description: "template"},]
-    //$scope.tool = ToolFactory.show({id: $routeParams.id});
+    $scope.iaas = IaaSFactory.show({id: $routeParams.id});
   }]);
 
 app.controller('IaaSCreateCtrl', ['$scope', 'IaaSsFactory', '$location',
-  function ($scope, IaaSFactory, $location) {
+  function ($scope, IaaSsFactory, $location) {
 
     // callback for ng-click 'createNewIaaS': 
     $scope.createNewIaaS = function () {
@@ -257,7 +259,7 @@ app.controller('IaaSCreateCtrl', ['$scope', 'IaaSsFactory', '$location',
 	  console.log($scope.iaas)
       IaaSsFactory.create($scope.iaas);
 	  
-      setTimeout(function(){ $location.path('/iaas-list'); }, 100);
+      setTimeout(function(){ $location.path('/iaas-list'); }, 10);
     }
 	
 	
@@ -275,13 +277,13 @@ app.controller('IaaSCreateCtrl', ['$scope', 'IaaSsFactory', '$location',
 
 
 app.controller('DeployListCtrl', ['$scope', 'DeploysFactory', 'DeployFactory', '$location', 
-  function ($scope, DeploysFactory, DeployFactory, $location) {
+  function ($scope, DeploysFactory, DeployFactory, IaaSsFactory, $location) {
 
     // callback for ng-click 'deleteDeploy': 
     $scope.deleteDeploy = function (deployId) {
       DeployFactory.delete({ id: deployId });
 	  
-	  setTimeout(function(){ $scope.tools = DeploysFactory.query(); }, 100);
+	  setTimeout(function(){ $scope.tools = DeploysFactory.query(); }, 10);
       
     };
 
@@ -296,7 +298,7 @@ app.controller('DeployDetailCtrl', ['$scope', '$routeParams', 'DeployFactory', '
 	  
       DeployFactory.update($scope.deploy);
 	  
-	  setTimeout(function(){ $location.path('/deploy-list'); }, 100);
+	  setTimeout(function(){ $location.path('/deploy-list'); }, 10);
     };
 
     // callback for ng-click 'cancel': 
@@ -304,38 +306,49 @@ app.controller('DeployDetailCtrl', ['$scope', '$routeParams', 'DeployFactory', '
       $location.path('/deploy-list');
     };
 	
-	//console.log($routeParams.id)
+	console.log($routeParams.id)
 	//$scope.items_type = [{name: "ansible" , description: "Ansible"}, {name: "cm" , description: "puppet"}, {name: "discovery" , description: "template"},]
-    //$scope.tool = ToolFactory.show({id: $routeParams.id});
+    $scope.deploy = DeployFactory.show({id: $routeParams.id});
   }]);
 
-app.controller('DeployCreateCtrl', ['$scope', 'DeploysFactory', '$location',
-  function ($scope, DeploysFactory, $location) {
+app.controller('DeployCreateCtrl', ['$scope', 'DeploysFactory', 'ToolsFactory', 'ImagesFactory', 'IaaSsFactory', '$location',
+  function ($scope, DeploysFactory, ToolsFactory, ImagesFactory, IaaSsFactory, $location) {
 
     // callback for ng-click 'createNewDeploy': 
     $scope.createNewDeploy = function () {
 	  
 	  console.log($scope.deploy)
-      DeploysFactory.create($scope.deploy);
+	  $scope.deploy.tool = []
+	  angular.forEach($scope.items_tool , function(value){
+        if(value.check == true) {
+           $scope.deploy.tool.push({idTool: value.id, name: value.name});
+		}
+
+      });
+
+	  console.log($scope.deploy)
+
+      //DeploysFactory.create($scope.deploy);
 	  
-      setTimeout(function(){ $location.path('/deploy-list'); }, 100);
+      setTimeout(function(){ $location.path('/deploy-list'); }, 10);
     }
 
 
 	$scope.tool = {};
-	var tools = ToolHostsFactory.query();
-	$scope.deploy.tool  = [];
+	var tools = ToolsFactory.query();
+	$scope.items_tool = []
+
     setTimeout( function(){ angular.forEach(tools , function(value){
 
-        $scope.deploy.tool.push({idTool: value.id, name: value.name , check: false});
+        $scope.items_tool.push({idTool: value.id, name: value.name , check: false});
 
       }); }, 200);
 	  
-	var images = ImageHostsFactory.query();
-	$scope.deploy.images  = [];
+	var images = ImagesFactory.query();
+	$scope.items_image  = [];
 	setTimeout( function(){ angular.forEach(images , function(value){
 
-        $scope.deploy.images.push({idImage: value.id, name: value.display , check: false});
+        $scope.items_image.push({idImage: value.id, name: value.display , check: false});
 
       }); }, 200); 
 

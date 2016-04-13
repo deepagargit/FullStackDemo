@@ -1,0 +1,50 @@
+<div class="container">
+  <h1>Create a new deployment</h1>
+
+  <form novalidate="novalidate" class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label" for="description">Description</label>
+
+      <div class="controls">
+        <input type="text" id="description" ng-model="deploy.description" placeholder="Description"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="priority">Priority</label>
+
+      <div class="controls">
+        <input type="text" id="priority" ng-model="deploy.priority" placeholder="Priority"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="Cleanrun">Cleanrun</label>
+      <div class="controls">
+        <input type="checkbox" id="cleanrun" ng-model="deploy.cleanrun" ng-init="deploy.cleanrun=true"/>
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="Tool">Tool</label>
+      <div class="controls" ng-repeat="item in items_tools">
+        <input type="checkbox"  ng-model="item.check"/> {{item.name}}
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="Image">Image</label>
+      <div class="controls" ng-repeat="item in items_images">
+        <input type="checkbox"  ng-model="item.check"/> {{item.name}}
+      </div>
+    </div>
+	<div class="control-group">
+      <label class="control-label" for="IaaS">IaaS</label>
+      <div class="controls">
+	  <select ng-model="deploy.idIaaS">
+        <option ng-repeat="item in items_iaas" value="{{item.id}}" ng-selected="deploy.idIaaS == item.id">{{item.name}}</option>
+	  </select>
+      </div>
+    </div>
+	<h1> </h1>
+    <div class="control-group">
+        <a ng-click="createNewDeploy()" class="btn btn-small btn-primary">Deploy</a>
+    </div>
+  </form>
+</div>
