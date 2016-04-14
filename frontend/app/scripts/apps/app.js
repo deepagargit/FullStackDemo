@@ -104,12 +104,7 @@ app.controller('ToolListCtrl', ['$scope', 'ToolsFactory', 'ToolFactory', '$locat
     };
 
 		$scope.tools = ToolsFactory.query();
-		console.log($scope.tools )
-		var count = 0
-		for(key in $scope.tools) {
-			count++
-		}
-		console.log("in tool-list ", count)
+		
 
   }]);
 
@@ -341,23 +336,17 @@ app.controller('DeployCreateCtrl', ['$scope', 'DeploysFactory', 'ToolsFactory', 
     console.log("in create ")
 	//$scope.tool = {};
 	var tools = ToolsFactory.query();
-    
-	setTimeout(function(){ 
-		console.log("in tools ", Object.keys(tools).length)
-		console.log("t", tools) 
-			}, 10);
 
 	$scope.items_tool = []
 
-    //setTimeout( function(){ 
+    setTimeout( function(){ 
 		angular.forEach(tools , function(value){
 
 		concole.log("incide tools")
 
         $scope.items_tool.push({idTool: value.id, name: value.name , check: false});
 
-      }); 
-	  //}, 10);
+      }); }, 100);
 
 	console.log($scope.items_tool)
 	  
