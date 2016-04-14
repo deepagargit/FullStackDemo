@@ -41,7 +41,7 @@ class DeploySerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True,)
     class Meta:
         model = Deploy
-        fields = ("id","description","priority","tools","images","idIaaS",)
+        fields = ("id","description","priority", "cleanrun", "tools","images","idIaaS",)
 
     def create(self, validated_data):
         tools_data = validated_data.pop('tools')

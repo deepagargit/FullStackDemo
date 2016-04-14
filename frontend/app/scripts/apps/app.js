@@ -104,7 +104,12 @@ app.controller('ToolListCtrl', ['$scope', 'ToolsFactory', 'ToolFactory', '$locat
     };
 
 		$scope.tools = ToolsFactory.query();
-		console.log($scope.tools)
+		console.log($scope.tools )
+		var count = 0
+		for(key in $scope.tools) {
+			count++
+		}
+		console.log("in tool-list ", count)
 
   }]);
 
@@ -333,16 +338,28 @@ app.controller('DeployCreateCtrl', ['$scope', 'DeploysFactory', 'ToolsFactory', 
       setTimeout(function(){ $location.path('/deploy-list'); }, 10);
     }
 
-
-	$scope.tool = {};
+    console.log("in create ")
+	//$scope.tool = {};
 	var tools = ToolsFactory.query();
+    
+	setTimeout(function(){ 
+		console.log("in tools ", Object.keys(tools).length)
+		console.log("t", tools) 
+			}, 10);
+
 	$scope.items_tool = []
 
-    setTimeout( function(){ angular.forEach(tools , function(value){
+    //setTimeout( function(){ 
+		angular.forEach(tools , function(value){
+
+		concole.log("incide tools")
 
         $scope.items_tool.push({idTool: value.id, name: value.name , check: false});
 
-      }); }, 200);
+      }); 
+	  //}, 10);
+
+	console.log($scope.items_tool)
 	  
 	var images = ImagesFactory.query();
 	$scope.items_image  = [];
@@ -350,14 +367,14 @@ app.controller('DeployCreateCtrl', ['$scope', 'DeploysFactory', 'ToolsFactory', 
 
         $scope.items_image.push({idImage: value.id, name: value.display , check: false});
 
-      }); }, 200); 
+      }); }, 10); 
 
 
 	  $scope.items_iaas = IaaSsFactory.query();
 	
 	//$scope.items_type = [{name: "ansible" , description: "Ansible"}, {name: "cm" , description: "puppet"}, {name: "discovery" , description: "template"},]
 	//$scope.tool =  {tool_type: $scope.items[0].name}
-    //console.log($scope.tool)
+    console.log($scope.items_tool)
 	//console.log($scope.items_type)
   
   }]); 

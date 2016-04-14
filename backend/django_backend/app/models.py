@@ -39,8 +39,9 @@ class DeployTool(models.Model):
 class Deploy(models.Model):
     description = models.TextField()
     priority = models.IntegerField()
+    cleanrun = models.BooleanField()
     tools = models.ManyToManyField(DeployTool)
     images = models.ManyToManyField(DeployImage)
-    idIaaS = models.IntegerField()
+    idIaaS = models.ForeignKey(IaaS)
    
 

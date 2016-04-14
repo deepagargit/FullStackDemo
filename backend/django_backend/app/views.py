@@ -182,45 +182,44 @@ class DeployList(APIView):
         deploys = Deploy.objects.all()
         serializer = DeploySerializer(deploys, many=True)
 
-		for deploy_item in serializer.data:
-			try:
-				iaass = IaaS.objects.get(pk=deploy_item['idIaaS'])
-			except IaaS.DoesNotExist:
-				raise Http404
+        for deploy_item in serializer.data:
+            try:
+                iaas = Iaa.objects.get(pk=deploy_item['idIaaS'])
+            except IaaS.DoesNotExist:
+                raise Http404
 
-			serializer_iaas = IaaSSerializer(iaas)
+            serializer_iaas = IaaSSerializer(iaas)
 
-			deploy_item['iaas_data'] = serializer_iaas.data
+            deploy_item['iaas_data'] = serializer_iaas.data
 
-			deploy_item['tool_data'] = []
+            deploy_item['tool_data'] = []
 
-			deploy_item['image_data']  = []
+            deploy_item['image_data']  = []
 
-			for tool_item in deploy_item['tools']:
-				try:
-					tool = Tool.objects.get(pk=tool_item['idTool'])
-				except Tool.DoesNotExist:
-					raise Http404
+            for tool_item in deploy_item['tools']:
+                try:
+                    tool = Tool.objects.get(pk=tool_item['idTool'])
+                except Tool.DoesNotExist:
+                    raise Http404
 
-				serializer_tool = ToolSerializer(tool)
+                serializer_tool = ToolSerializer(tool)
 
-				print('tool ', serializer_tool.data)
-				deploy_item['tool_data'].append(serializer_tool.data)
+                print('tool ', serializer_tool.data)
+                deploy_item['tool_data'].append(serializer_tool.data)
+        
+            for image_item in deploy_item['images']:
+                try:
+                    image = Image.objects.get(pk=image_item['idImage'])
+                except Tool.DoesNotExist:
+                    raise Http404
 
-			
-			for image_item in deploy_item['images']:
-				try:
-					image = Image.objects.get(pk=image_item['idImage'])
-				except Tool.DoesNotExist:
-					raise Http404
-
-				serializer_image = ImageSerializer(image)
-
-				print('image ', serializer_image.data)
-				deploy_item['image_data'].append(serializer_image.data)
-
+                serializer_image = ImageSerializer(image)
+            
+                print('image ', serializer_image.data)
+                deploy_item['image_data'].append(serializer_image.data)
 
         return Response(serializer.data)
+    
 
     def post(self, request, format=None):
         serializer = DeploySerializer(data=request.data)
